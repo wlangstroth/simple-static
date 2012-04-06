@@ -31,7 +31,7 @@ you make an index page 'index.md' under site/, along with a projects/
 subdirectory, which has its own 'index.md', so that the result is a directory
 tree that looks like this:
 
-sw.conf
+ss.conf
 style.css
 site/
   index.md
