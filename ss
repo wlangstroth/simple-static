@@ -1,23 +1,23 @@
 #!/bin/sh
-# simplest - based on sw, the simplest static website generator possible.
+# simplest - based on ss, the simplest static website generator possible.
 
-sw_filter() {
+ss_filter() {
   for b in $BL; do
     [ "$b" = "$1" ] && return 0
   done
 }
 
-sw_main() {
+ss_main() {
   $MDHANDLER $1
 }
 
-sw_menu() {
+ss_menu() {
   echo "<ul>"
   [ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
   [ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
   FILES=`ls \`dirname $1\` | sed -e 's,.md$,.html,g'`
   for i in $FILES ; do
-    sw_filter $i && continue
+    ss_filter $i && continue
     NAME=`echo $i | sed -e 's/\..*$//' -e 's/_/ /g'`
     [ -z "`echo $i | grep '\..*$'`" ] && i="$i/index.html"
     echo "<li><a href=\"$i\">$NAME</a></li>"
@@ -25,7 +25,7 @@ sw_menu() {
   echo "</ul>"
 }
 
-sw_page() {
+ss_page() {
   # Header
   cat << _header_
 <!doctype html>
@@ -40,7 +40,7 @@ sw_page() {
 _header_
 
   # Stylesheet
-  sw_style
+  ss_style
 
   cat << _header_
   </head>
@@ -54,25 +54,25 @@ _header_
 
   # Menu
   echo "<div id=\"side-bar\">"
-  sw_menu $1
+  ss_menu $1
   echo "</div>"
 
   # Body
   echo "<div id=\"main\">"
-  sw_main $1
+  ss_main $1
   echo "</div>"
 
   # Footer
   cat << _footer_
   <div id="footer">
-    <div class="right"><a href="http://nibble.develsec.org/projects/sw.html">Powered by sw</a></div>
+    <div class="right"><a href="http://nibble.develsec.org/projects/ss.html">Powered by ss</a></div>
   </div>
   </body>
 </html>
 _footer_
 }
 
-sw_style() {
+ss_style() {
   if [ -f $CDIR/$STYLE ]; then
     echo '<style type="text/css">'
     cat $CDIR/$STYLE
@@ -83,17 +83,17 @@ sw_style() {
 # Set input dir
 IDIR="`echo $1 | sed -e 's,/*$,,'`"
 if [ -z "$IDIR" ] || [ ! -d $IDIR ]; then
-  echo "Usage: sw [dir]"
+  echo "Usage: ss [dir]"
   exit 1
 fi
 
 # Load config file
-if [ ! -f $PWD/sw.conf ]; then
-  echo "Cannot find sw.conf in current directory"
+if [ ! -f $PWD/ss.conf ]; then
+  echo "Cannot find ss.conf in current directory"
   exit 1
 fi
 
-. $PWD/sw.conf
+. $PWD/ss.conf
 
 # Setup output dir structure
 CDIR=$PWD
@@ -109,7 +109,7 @@ FILES=`find . -iname '*.md' | sed -e 's,^\./,,'`
 for a in $FILES; do
   b="$ODIR/`echo $a | sed -e 's,.md$,.html,g'`"
   echo "* $a"
-  sw_page $a > $b;
+  ss_page $a > $b;
 done
 
 exit 0
