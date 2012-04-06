@@ -1,5 +1,5 @@
 #!/bin/sh
-# sw - suckless webframework - 2012 - nibble <develsec.org>
+# simplest - based on sw, the simplest static website generator possible.
 
 sw_filter() {
   for b in $BL; do
@@ -29,37 +29,45 @@ sw_page() {
   # Header
   cat << _header_
 <!doctype html>
-<html>
-<head>
-<title>${TITLE}</title>
-<link rel="icon" href="/favicon.png" type="image/png">
-<meta charset="utf-8">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <title>${TITLE}</title>
+    <!-- <link rel="icon" href="/favicon.png" type="image/png"> -->
+    <meta charset="utf-8">
 _header_
+
   # Stylesheet
   sw_style
+
   cat << _header_
-</head>
-<body>
-<div class="header">
-<h1 class="headerTitle">
-<a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span class="headerSubtitle">${SUBTITLE}</span>
-</h1>
-</div>
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="headerTitle">
+        <a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span class="headerSubtitle">${SUBTITLE}</span>
+      </h1>
+    </div>
 _header_
+
   # Menu
   echo "<div id=\"side-bar\">"
   sw_menu $1
   echo "</div>"
+
   # Body
   echo "<div id=\"main\">"
   sw_main $1
   echo "</div>"
+
   # Footer
   cat << _footer_
-<div id="footer">
-<div class="right"><a href="http://nibble.develsec.org/projects/sw.html">Powered by sw</a></div>
-</div>
-</body>
+  <div id="footer">
+    <div class="right"><a href="http://nibble.develsec.org/projects/sw.html">Powered by sw</a></div>
+  </div>
+  </body>
 </html>
 _footer_
 }
@@ -84,6 +92,7 @@ if [ ! -f $PWD/sw.conf ]; then
   echo "Cannot find sw.conf in current directory"
   exit 1
 fi
+
 . $PWD/sw.conf
 
 # Setup output dir structure
