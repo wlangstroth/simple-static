@@ -96,7 +96,7 @@ rm -f `find $ODIR -type f -iname '*.md'`
 
 # Parse files
 cd $IDIR
-FILES=`find -iname '*.md' | sed -e 's,^\./,,'`
+FILES=`find . -iname '*.md' | sed -e 's,^\./,,'`
 for a in $FILES; do
 	b="$ODIR/`echo $a | sed -e 's,.md$,.html,g'`"
 	echo "* $a"
