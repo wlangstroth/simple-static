@@ -1,40 +1,66 @@
-sw - suckless webframework
-==========================
-sw is a minimal and sane web framework.
+simple-static
+=============
+
+The simplest static site generator I can think of.
+
 
 Installation
 ------------
-Run:
-	make && make install PREFIX=/usr/local
+
+  make && make install PREFIX=/usr/local
+
 
 Configuration
 -------------
+
 Copy sw.conf and style.css to your working directory, and edit them to fit your needs.
+
 
 Static web generation
 ---------------------
-Run from your working directory:
-	sw /path/to/site
+
+From your working directory:
+
+    sw site
 
 Where 'site' is the folder where your website is located.
 The static version of the website is created under 'site.static'.
 
-Automatic generation+upload
----------------------------
-The whole process can be automatized if you create a Makefile like this in your working directory:
+For example, if you want to create a site with a subdirectory for projects,
+you make an index page 'index.md' under site/, along with a projects/
+subdirectory, which has its own 'index.md', so that the result is a directory
+tree that looks like this:
+
+sw.conf
+style.css
+site/
+  index.md
+  projects/
+    index.md
+
+simple-static will create this:
+
+site.static/
+  index.html
+  projects/
+    index.html
+
+
+Generate and Upload
+-------------------
+
+The whole process can be automated if you create a Makefile like this in your working directory:
 
 $ cat Makefile
 all:
-	sw /path/to/site
-	rsync -avz site.static/ foo.org:/path/to/wwwroot/
+    sw /path/to/site
+    rsync -avz site.static/ foo.org:/path/to/wwwroot/
 clean:
-	rm -rf site.static
+    rm -rf site.static
 
-Author
-------
+
+Original Authors
+----------------
 Nibble <develsec.org>
-
-Contributors
-------------
 pancake <nopcode.org>
 Andrew Antle
