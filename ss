@@ -1,14 +1,14 @@
 #!/bin/sh
-# simple-static - based on ss, the simplest static website generator possible.
+# simple-static - based on sw
+# 
+# TODO:
+# 1) Move the HTML out of this file
 
+# Glackost filter (BL in the config file)
 ss_filter() {
   for b in $BL; do
     [ "$b" = "$1" ] && return 0
   done
-}
-
-ss_main() {
-  $MDHANDLER $1
 }
 
 ss_menu() {
@@ -26,9 +26,10 @@ ss_menu() {
 }
 
 ss_page() {
+
   # Header
   cat << _header_
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -43,71 +44,76 @@ _header_
   ss_style
 
   cat << _header_
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <div class="header">
-      <h1 class="headerTitle">
-        <a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span class="headerSubtitle">${SUBTITLE}</span>
+    <header>
+      <h1>
+        <a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span>${SUBTITLE}</span>
       </h1>
-    </div>
 _header_
 
   # Menu
-  echo "<div id=\"side-bar\">"
+  echo "   <nav>"
   ss_menu $1
-  echo "</div>"
+  echo "   </nav>"
+
+  echo "  </header>"
 
   # Body
   echo "<div id=\"main\">"
-  ss_main $1
+  $MDHANDLER $1
   echo "</div>"
 
   # Footer
   cat << _footer_
-  <div id="footer">
-    <div class="right"><a href="http://nibble.develsec.org/projects/ss.html">Powered by ss</a></div>
-  </div>
+  <footer>
+    <div class="right"><a href="http://github.com/wlangstroth/simple-static">Powered by ss</a></div>
+  </footer>
   </body>
 </html>
 _footer_
 }
 
 ss_style() {
-  if [ -f $CDIR/$STYLE ]; then
-    echo '<style type="text/css">'
-    cat $CDIR/$STYLE
+  if [ -f $WORKING_DIR/$STYLE ]; then
+    echo '<style>'
+    cat $WORKING_DIR/$STYLE
     echo '</style>'
   fi
 }
 
-# Set input dir
-IDIR="`echo $1 | sed -e 's,/*$,,'`"
-if [ -z "$IDIR" ] || [ ! -d $IDIR ]; then
+# ------------------------------------------------------------------------------
+# Moin routine
+# ------------------------------------------------------------------------------
+INPUT_DIR="`echo $1 | sed -e 's,/*$,,'`"
+if [ -z "$INPUT_DIR" ] || [ ! -d $INPUT_DIR ]; then
   echo "Usage: ss [dir]"
   exit 1
 fi
 
 # Load config file
-if [ ! -f $PWD/ss.conf ]; then
+if [ ! -f ss.conf ]; then
   echo "Cannot find ss.conf in current directory"
   exit 1
 fi
 
-. $PWD/ss.conf
+. ss.conf
 
-# Setup output dir structure
-CDIR=$PWD
-ODIR="$CDIR/`basename $IDIR`.static"
-rm -rf $ODIR
-mkdir -p $ODIR
-cp -rf $IDIR/* $ODIR
-rm -f `find $ODIR -type f -iname '*.md'`
+WORKING_DIR=$PWD
+OUTPUT_DIR="$WORKING_DIR/`basename $INPUT_DIR`.static"
+rm -rf $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
+cp -rf $INPUT_DIR/* $OUTPUT_DIR
+rm -f `find $OUTPUT_DIR -type f -iname '*.md'`
 
-# Parse files
-cd $IDIR
+# Parse and generate
+cd $INPUT_DIR
 FILES=`find . -iname '*.md' | sed -e 's,^\./,,'`
 for a in $FILES; do
-  b="$ODIR/`echo $a | sed -e 's,.md$,.html,g'`"
+  b="$OUTPUT_DIR/`echo $a | sed -e 's,.md$,.html,g'`"
   echo "* $a"
   ss_page $a > $b;
 done

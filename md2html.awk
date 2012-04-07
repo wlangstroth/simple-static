@@ -201,7 +201,7 @@ function inline(t) {
   ilcode = 0;
   ilcode2 = 0;
   ns = 0;
-  
+
   return nextil(t);
 }
 
@@ -288,7 +288,7 @@ html {
 }
 nnl < nl && !blank && text && ! /^ ? ? ?([*+-]|([0-9]+\.)+)( +|  )/ { nnl = nl; }
 #   Quote blocks
-{ 
+{
   while(sub(/^> /, ""))
     nblock[++nnl] = "blockquote";
 }
@@ -321,7 +321,7 @@ block[nl] ~ /[ou]l/ && /^$/ {
   nblock[nnl] = "ol";
   newli = 1;
 }
-newli { 
+newli {
   if(blank && nnl == nl && !par)
     par = "p";
   blank = 0;
@@ -336,7 +336,7 @@ blank && ! /^$/ {
   par = "p";
   blank = 0;
 }
-    
+
 # Close old blocks and open new ones
 nnl != nl || nblock[nl] != block[nl] {
   if(code){
@@ -368,7 +368,7 @@ hr {
 }
 
 # Code blocks
-code && /^$/ { 
+code && /^$/ {
   if(blanK)
     oprint("");
   blank = 1;
@@ -392,7 +392,7 @@ code {
 
 # Setex-style Headers
 text && /^=+$/ {printp("h1"); next;}
-text && /^-+$/ {printp("h2"); next;} 
+text && /^-+$/ {printp("h2"); next;}
 
 # Atx-Style headers
 /^#+/ && (!newli || par=="p" || /^##/) {
@@ -401,7 +401,7 @@ text && /^-+$/ {printp("h2"); next;}
   par = "h" n;
 }
 
-# Paragraph  
+# Paragraph
 /^$/ {
   printp(par);
   par = "p";

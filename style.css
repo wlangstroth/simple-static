@@ -1,4 +1,3 @@
-/* General */
 body {
   color: #aaa;
   font-family: sans-serif;
@@ -7,37 +6,32 @@ body {
   padding: 0;
 }
 
-/* Header */
-.header { background-color: #ccc; border: 0; }
-.header a { border: 0; color: #111; text-decoration: none; }
-.midHeader img { border: 0; }
+header { background-color: #ccc; border: 0; }
+header a { border: 0; color: #111; text-decoration: none; }
 
-.headerTitle { font-size: 1.6em; font-weight: bold; margin: 0 0 0 0.5em; padding: 0.5em; }
-.headerTitle a { border: 0; text-decoration: none; }
+header h1 { font-size: 1.6em; font-weight: bold; margin: 0 0 0 0.5em; padding: 0.5em; }
+header h1 span { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
 
-.headerSubTitle { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
-
-/* Side */
-#side-bar {
+nav {
   width: 100%;
-  clear: both;
+  cursor: pointer;
   border: 0;
   margin: 0;
   padding: 0;
   background-color: #ddd;
 }
 
-#side-bar ul {
-  margin: 0;
+nav ul {
+  margin: 0 0 0 1.0em;
   padding: 0.3em;
   list-style-type: none;
   list-style-image: none;
   border: 0;
 }
 
-#side-bar li { display: inline; line-height: 1.6em; white-space: nowrap; }
+nav li { display: inline; line-height: 1.6em; white-space: nowrap; }
 
-#side-bar ul li a {
+nav ul li a {
   margin: 0;
   padding: 0.1em 1ex 0.1em 1ex;
   color: #336699;
@@ -47,9 +41,8 @@ body {
   border: 0;
 }
 
-#side-bar ul li a:hover { color: #111; text-decoration: none; }
+nav ul li a:hover { color: #111; text-decoration: none; }
 
-/* Main Copy */
 #main {
   max-width: 70em;
   color: #111;
@@ -63,19 +56,18 @@ body {
 #main h1, #main-copy h2 { color: #666; }
 #main ul { list-style-type: square; }
 
-/* Footer */
-#footer {
+footer {
   background-color: #ddd;
   color: #111;
   font-size: 91%;
-  padding: 2em;
+  padding: 1.0em 2.0em;
   clear: both;
 }
 
-#footer .left { text-align: left; float: left; clear: left; }
-#footer .right { text-align: right; }
-#footer a { color: #111; text-decoration: none; }
-#footer a:hover { text-decoration: underline; }
+footer .left { text-align: left; float: left; clear: left; }
+footer .right { text-align: right; }
+footer a { color: #111; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 
 abbr, acronym { border-bottom: 1px dotted #333; cursor: help; }
 blockquote { border-left: 1px solid #333; font-style: italic; padding: 1em; }
