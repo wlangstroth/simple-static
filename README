@@ -7,7 +7,7 @@ The simplest static site generator I can think of.
 Installation
 ------------
 
-  make && make install PREFIX=/usr/local
+    make && make install PREFIX=/usr/local
 
 
 Configuration
