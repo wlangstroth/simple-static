@@ -4,9 +4,9 @@
 # TODO:
 # 1) Move the HTML out of this file
 
-# Glackost filter (BL in the config file)
+# Blacklist filter (BLACKLIST in the config file)
 ss_filter() {
-  for b in $BL; do
+  for b in $BLACKLIST; do
     [ "$b" = "$1" ] && return 0
   done
 }
