@@ -1,5 +1,5 @@
 #!/bin/sh
-# simplest - based on ss, the simplest static website generator possible.
+# simple-static - based on ss, the simplest static website generator possible.
 
 ss_filter() {
   for b in $BL; do
