@@ -1,15 +1,13 @@
-DESTDIR?=
 PREFIX?=/usr/local
-P=${DESTDIR}/${PREFIX}
+BIN=${PREFIX}/bin
+MD=${BIN}/md2html.awk
+SS=${BIN}/ss
 
-all: ss.conf
-
-ss.conf:
-	cp ss.conf.def ss.conf
+all: install
 
 install:
-	mkdir -p ${P}/bin
-	sed -e "s,/usr/bin/awk,`./whereis awk`,g" md2html.awk > ${P}/bin/md2html.awk
-	chmod +x ${P}/bin/md2html.awk
-	cp -f ss ${P}/bin/ss
-	chmod +x ${P}/bin/ss
+	mkdir -p ${BIN}
+	sed -e "s,/usr/bin/awk,`which awk`,g" md2html.awk > ${MD}
+	chmod +x ${MD}
+	cp -f ss ${SS}
+	chmod +x ${SS}
