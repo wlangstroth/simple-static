@@ -17,7 +17,19 @@ Or if you want to specify the installation path
 Configuration
 -------------
 
-Copy ss.conf and style.css to your working directory, and edit them to fit your needs.
+Copy ss.conf and style.css to your working directory, and edit them to fit your
+needs.
+
+A method for converting markdown to html is provided (md2html.awk), but
+if you need a more sophisticated markdown processor, check out discount
+(http://www.pell.portland.or.us/~orc/Code/discount/). To use discount, follow
+its installation guide and change MDHANDLER line in your ss.conf file to
+markdown, like so:
+
+    MDHANDLER="markdown"
+
+That will allow you to use many more markdown features than the simple awk
+translator provides.
 
 
 Static web generation
@@ -30,10 +42,10 @@ From your working directory:
 Where 'site' is the folder where your website is located.
 The static version of the website is created under 'site.static'.
 
-For example, if you want to create a site with a subdirectory for projects,
-you make an index page 'index.md' under site/, along with a projects/
-subdirectory, which has its own 'index.md', so that the result is a directory
-tree that looks like this:
+For example, if you want to create a site with a subdirectory for projects, you
+make an index page 'index.md' under site/, along with a projects/ subdirectory,
+which has its own 'index.md', so that the result is a directory tree that looks
+like this:
 
 ss.conf
 style.css
@@ -53,7 +65,8 @@ site.static/
 Generate and Upload
 -------------------
 
-The whole process can be automated if you create a Makefile like this in your working directory:
+The whole process can be automated if you create a Makefile like this in your
+working directory:
 
 $ cat Makefile
 all:
