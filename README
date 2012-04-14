@@ -2,16 +2,17 @@ simple-static
 =============
 
 The simplest static site generator I can think of. Great for documentation.
+Based on sw (http://nibble.develsec.org/projects/sw.html)
 
 
 Installation
 ------------
 
-    make install
+    $ make install
 
 Or if you want to specify the installation path
 
-    make install PREFIX=/usr/local
+    $ make install PREFIX=/usr/local
 
 
 Configuration
@@ -37,7 +38,7 @@ Static web generation
 
 From your working directory:
 
-    ss site
+    $ ss site
 
 Where 'site' is the folder where your website is located.
 The static version of the website is created under 'site.static'.
