@@ -21,16 +21,13 @@ Configuration
 Copy ss.conf and style.css to your working directory, and edit them to fit your
 needs.
 
-A method for converting markdown to html is provided (md2html.awk), but
-if you need a more sophisticated markdown processor, check out discount
-(http://www.pell.portland.or.us/~orc/Code/discount/). To use discount, follow
-its installation guide and change MDHANDLER line in your ss.conf file to
+A method for converting markdown to html is provided (md2html.awk), but if
+you need a more sophisticated markdown processor, you can use something like
+discount (http://www.pell.portland.or.us/~orc/Code/discount/). Follow its
+installation guide and change MDHANDLER line in your ss.conf file to
 markdown, like so:
 
     MDHANDLER="markdown"
-
-That will allow you to use many more markdown features than the simple awk
-translator provides.
 
 
 Static web generation
