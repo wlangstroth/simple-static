@@ -17,9 +17,9 @@ ss_menu() {
   echo "<ul>"
   [ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
   [ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
-  FILES=`ls \`dirname $1\` | sed -e 's,.md$,.html,g'`
-  for i in $FILES ; do
-    ss_filter $i && continue
+  THE_FILES=`ls \`dirname $1\` | sed -e 's/\.md$/.html/g'`
+  for i in $THE_FILES ; do
+    #ss_filter $i && continue
     NAME=`echo $i | sed -e 's/\..*$//' -e 's/_/ /g'`
     [ -z "`echo $i | grep '\..*$'`" ] && i="$i/index.html"
     echo "<li><a href=\"$i\">$NAME</a></li>"
@@ -53,7 +53,7 @@ _header_
   <body>
     <header>
       <h1>
-        <a href="`echo $1 | sed -e 's,[^/]*/,../,g' -e 's,[^/]*.md$,index.html,g'`">${TITLE}</a> <span>${SUBTITLE}</span>
+        <a href="`echo $1 | sed -e 's|[^/]*/|../|g' -e 's|[^/]*\.md$|index.html|g'`">${TITLE}</a> <span>${SUBTITLE}</span>
       </h1>
 _header_
 
@@ -90,7 +90,8 @@ ss_style() {
 # ------------------------------------------------------------------------------
 # Moin routine
 # ------------------------------------------------------------------------------
-INPUT_DIR="`echo $1 | sed -e 's,/*$,,'`"
+
+INPUT_DIR="`echo $1 | sed -e 's|/*$||'`"
 if [ -z "$INPUT_DIR" ] || [ ! -d $INPUT_DIR ]; then
   echo "Usage: ss [dir]"
   exit 1
@@ -113,9 +114,9 @@ rm -f `find $OUTPUT_DIR -type f -iname '*.md'`
 
 # Parse and generate
 cd $INPUT_DIR
-FILES=`find . -iname '*.md' | sed -e 's,^\./,,'`
+FILES=`find . -iname '*.md' | sed -e 's|^\./||'`
 for a in $FILES; do
-  b="$OUTPUT_DIR/`echo $a | sed -e 's,.md$,.html,g'`"
+  b="$OUTPUT_DIR/`echo $a | sed -e 's|\.md$|.html|g'`"
   echo "* $a"
   ss_page $a > $b;
 done
