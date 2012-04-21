@@ -17,10 +17,10 @@ ss_menu() {
   echo "<ul>"
   [ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
   [ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
-  THE_FILES=`ls \`dirname $1\` | sed -e 's/\.md$/.html/g'`
-  for i in $THE_FILES ; do
-    #ss_filter $i && continue
-    NAME=`echo $i | sed -e 's/\..*$//' -e 's/_/ /g'`
+  FILES=`ls \`dirname $1\` | sed -e 's/\.md$/.html/g'`
+  for i in $FILES ; do
+    ss_filter $i && continue
+    NAME=`echo $i | sed -e 's/\..*$//'`
     [ -z "`echo $i | grep '\..*$'`" ] && i="$i/index.html"
     echo "<li><a href=\"$i\">$NAME</a></li>"
   done
