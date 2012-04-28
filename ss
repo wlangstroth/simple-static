@@ -3,8 +3,6 @@
 # 
 # TODO:
 # 1) Move the HTML out of this file
-# 2) diff existing files before generating, instead of erasing the whole
-#    directory (if the static directory exists)
 
 # Blacklist filter (BLACKLIST in the config file)
 ss_filter() {
