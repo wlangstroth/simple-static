@@ -1,8 +1,5 @@
 #!/bin/sh
-# simple-static - based on sw
-# 
-# TODO:
-# 1) Move the HTML out of this file
+# simple-static
 
 # Blacklist filter (BLACKLIST in the config file)
 ss_filter() {
@@ -13,8 +10,11 @@ ss_filter() {
 
 ss_menu() {
   echo "<ul>"
-  [ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
-  [ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
+# For conditional directory navigation
+#  [ -z "`echo $1 | grep index.md`" ] && echo "<li><a href=\"index.html\">.</a></li>"
+#  [ "`dirname $1`" != "." ] && echo "<li><a href=\"../index.html\">..</a></li>"
+  echo "<li><a href=\"index.html\">.</a></li>"
+  echo "<li><a href=\"../index.html\">..</a></li>"
   FILES=`ls \`dirname $1\` | sed -e 's/\.md$/.html/g'`
   for i in $FILES ; do
     ss_filter $i && continue
@@ -78,9 +78,9 @@ _footer_
 }
 
 ss_style() {
-  if [ -f $WORKING_DIR/$STYLE ]; then
+  if [ -f $WORKING_DIR/style.css ]; then
     echo '<style>'
-    cat $WORKING_DIR/$STYLE
+    cat $WORKING_DIR/style.css
     echo '</style>'
   fi
 }
