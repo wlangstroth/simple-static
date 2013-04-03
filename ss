@@ -1,5 +1,5 @@
 #!/bin/sh
-# simple-static
+# simple-static site generator
 
 # Blacklist filter (BLACKLIST in the config file)
 ss_filter() {
@@ -26,7 +26,6 @@ ss_menu() {
 }
 
 ss_page() {
-
   # Header
   cat << _header_
 <!DOCTYPE html>

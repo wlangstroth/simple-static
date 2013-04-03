@@ -11,3 +11,4 @@ install:
 	chmod +x ${BIN}/${MD_FILE}
 	cp -f ss ${SS}
 	chmod +x ${SS}
+	## You're good to go! ##
