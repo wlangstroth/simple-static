@@ -46,6 +46,7 @@ _header_
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="http://fonts.googleapis.com/css?family=Open+Sans:400,600"></script>
   </head>
   <body>
     <header>
@@ -69,7 +70,7 @@ _header_
   # Footer
   cat << _footer_
   <footer>
-    <div class="right"><a href="http://github.com/wlangstroth/simple-static">Powered by ss</a></div>
+    <div class="right"><a href="http://github.com/wlangstroth/simple-static">Powered by simple-static</a></div>
   </footer>
   </body>
 </html>
