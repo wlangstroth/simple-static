@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # simple-static site generator
 
 # Blacklist filter (BLACKLIST in the config file)
