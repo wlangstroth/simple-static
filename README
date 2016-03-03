@@ -2,7 +2,7 @@ simple-static
 =============
 
 The simplest static site generator I can think of. Great for documentation.
-Based on sw (http://nibble.develsec.org/projects/sw.html)
+Based on sw (https://github.com/jroimartin/sw)
 
 
 Installation
