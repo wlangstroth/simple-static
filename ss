@@ -47,6 +47,7 @@ _header_
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   </head>
   <body>
     <header>
